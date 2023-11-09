@@ -12,17 +12,8 @@ import os
 import numpy as np
 
 
-def generate_scatter_plot(request):
-    # data = pd.read_csv(settings.DATASET_PATH)
-    # plt.scatter(data['house_age'], data['house_price_of_unit_area'])
-    # plt.title('House Age vs. Price (Scatter Plot)')
-    # plt.xlabel('House Age')
-    # plt.ylabel('Price (unit area)')
-    # response = HttpResponse(content_type='image/png')
-    # plt.savefig(response, format='png')
-    # return response
-
-     # Load the dataset
+def generate_countour_plot(request):
+    # Load the dataset
     data = pd.read_csv(settings.DATASET_PATH)
 
     # Generate contour plot
@@ -45,13 +36,8 @@ def generate_scatter_plot(request):
     return response
 
 
-def generate_bar_chart(request):
+def generate_area_chart(request):
     data = pd.read_csv(settings.DATASET_PATH)
-    # bar_data = data.groupby('number_of_convenience_stores')['house_price_of_unit_area'].mean().reset_index()
-    # fig = px.bar(bar_data, x='number_of_convenience_stores', y='house_price_of_unit_area', title='Average Price by Convenience Stores (Bar Chart)')
-    # html_div = fig.to_html(full_html=False)
-    # return HttpResponse(html_div)
-    # Generate area plot
     area_plot = BytesIO()
     plt.figure(figsize=(10, 6))
     plt.stackplot(range(len(data)), data['petal_length'], data['petal_width'], labels=['Petal Length', 'Petal Width'], alpha=0.5)
@@ -64,9 +50,6 @@ def generate_bar_chart(request):
     plt.savefig(response, format='png')
     plt.close()
     return response
-    # html_div = fig.to_html(full_html=False)
-    # return HttpResponse(html_div)
-
 
 def home(request):
     # Your view logic here
